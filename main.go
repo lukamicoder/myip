@@ -14,7 +14,6 @@ import (
 
 var regex = regexp.MustCompile("(?m)[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}")
 var verbose = false
-var interactive = false
 
 var urls = []string{
 	"myipinfo.net",
@@ -32,6 +31,7 @@ var urls = []string{
 }
 
 func main() {
+	var interactive = false
 	var currentIp net.IP = nil
 
 	if len(os.Args) > 1 {
@@ -45,10 +45,14 @@ func main() {
 				fmt.Print(`
 Usage: myip [options]
 where options include:
+	--local, -l		returns the local IP address(es)
 	--verbose, -v		enable verbose output
 	--interactive, -i	enable interactive mode
 	--help, -h		print this help message
 `)
+				return
+			case "-l", "--local":
+				listLocalIP()
 				return
 			}
 		}
@@ -90,6 +94,25 @@ where options include:
 		return
 	}
 	fmt.Println(currentIp.String())
+}
+
+func listLocalIP() {
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		if verbose {
+			fmt.Printf("%v\n", err)
+		}
+
+		return
+	}
+
+	for _, address := range addrs {
+		if ipnet, ok := address.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+			if ipnet.IP.To4() != nil {
+				fmt.Println(ipnet.IP.String())
+			}
+		}
+	}
 }
 
 func getExternalIP() net.IP {
