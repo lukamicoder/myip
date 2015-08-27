@@ -80,6 +80,10 @@ where options include:
 				fmt.Println("Incorrect url has been entered.")
 				return
 			}
+			if url == "" {
+				return
+			}
+
 		} else {
 			url = urls[number-1]
 		}
