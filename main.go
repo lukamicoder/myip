@@ -28,6 +28,8 @@ var urls = []string{
 	"bot.whatismyipaddress.com",
 	"ipv4.ipogre.com",
 	"smart-ip.net/myip",
+	"checkip.amazonaws.com",
+	"www.checkip.org",
 }
 
 func main() {
