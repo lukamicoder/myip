@@ -57,7 +57,8 @@ where options include:
 				listLocalIP()
 				return
 			default:
-				fmt.Print(`Invalid option: '` + arg + `'`)
+				fmt.Print(`Invalid option: '` + arg + `'
+`)
 				return
 			}
 		}
