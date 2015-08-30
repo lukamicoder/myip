@@ -56,6 +56,9 @@ where options include:
 			case "-l", "--local":
 				listLocalIP()
 				return
+			default:
+				fmt.Print(`Invalid option: '` + arg + `'`)
+				return
 			}
 		}
 	}
@@ -63,19 +66,19 @@ where options include:
 	if interactive {
 		fmt.Println("Select a url from the list:")
 		for i, url := range urls {
-			fmt.Printf("	[%v] %v\n", i+1, url)
+			fmt.Printf("	[%v] %v\n", i + 1, url)
 		}
-		fmt.Printf("	[%v] custom url\n", len(urls)+1)
+		fmt.Printf("	[%v] custom url\n", len(urls) + 1)
 
 		var number int
 		_, err := fmt.Scanln(&number)
-		if err != nil || number <= 0 || number > (len(urls)+1) {
+		if err != nil || number <= 0 || number > (len(urls) + 1) {
 			fmt.Println("Incorrect value has been entered.")
 			return
 		}
 
 		var url string
-		if number == len(urls)+1 {
+		if number == len(urls) + 1 {
 			fmt.Println("Enter url:")
 			_, err := fmt.Scanln(&url)
 			if err != nil {
@@ -87,7 +90,7 @@ where options include:
 			}
 
 		} else {
-			url = urls[number-1]
+			url = urls[number - 1]
 		}
 		currentIp = getExternalIPByURL(url)
 	} else {
