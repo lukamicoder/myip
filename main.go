@@ -14,6 +14,7 @@ import (
 
 var regex = regexp.MustCompile("(?m)[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}")
 var verbose = false
+var interactive = false
 
 var urls = []string{
 	"myipinfo.net",
@@ -33,9 +34,6 @@ var urls = []string{
 }
 
 func main() {
-	var interactive = false
-	var currentIP net.IP
-
 	if len(os.Args) > 1 {
 		for _, arg := range os.Args[1:] {
 			switch arg {
@@ -54,7 +52,7 @@ where options include:
 `)
 				return
 			case "-l", "--local":
-				listLocalIP()
+				printLocalIP()
 				return
 			default:
 				fmt.Print(`Invalid option: '` + arg + `'
@@ -63,6 +61,12 @@ where options include:
 			}
 		}
 	}
+
+	printIP()
+}
+
+func printIP() {
+	var currentIP net.IP
 
 	if interactive {
 		fmt.Println("Select a url from the list:")
@@ -93,6 +97,7 @@ where options include:
 		} else {
 			url = urls[number - 1]
 		}
+
 		currentIP = getExternalIPByURL(url)
 	} else {
 		rand.Seed(time.Now().UTC().UnixNano())
@@ -103,10 +108,11 @@ where options include:
 		fmt.Println("No external IP address found.")
 		return
 	}
+
 	fmt.Println(currentIP.String())
 }
 
-func listLocalIP() {
+func printLocalIP() {
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {
 		if verbose {
