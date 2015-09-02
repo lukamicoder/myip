@@ -34,7 +34,7 @@ var urls = []string{
 
 func main() {
 	var interactive = false
-	var currentIp net.IP = nil
+	var currentIP net.IP
 
 	if len(os.Args) > 1 {
 		for _, arg := range os.Args[1:] {
@@ -93,17 +93,17 @@ where options include:
 		} else {
 			url = urls[number - 1]
 		}
-		currentIp = getExternalIPByURL(url)
+		currentIP = getExternalIPByURL(url)
 	} else {
 		rand.Seed(time.Now().UTC().UnixNano())
-		currentIp = getExternalIP()
+		currentIP = getExternalIP()
 	}
 
-	if currentIp == nil {
+	if currentIP == nil {
 		fmt.Println("No external IP address found.")
 		return
 	}
-	fmt.Println(currentIp.String())
+	fmt.Println(currentIP.String())
 }
 
 func listLocalIP() {
@@ -126,7 +126,7 @@ func listLocalIP() {
 }
 
 func getExternalIP() net.IP {
-	var currentIp net.IP
+	var currentIP net.IP
 	for _, i := range rand.Perm(len(urls)) {
 		if verbose {
 			fmt.Printf("Connecting to %v...\n", urls[i])
@@ -144,16 +144,16 @@ func getExternalIP() net.IP {
 
 		ip := regex.FindString(content)
 
-		currentIp = net.ParseIP(ip)
+		currentIP = net.ParseIP(ip)
 
-		if currentIp != nil {
-			return currentIp
+		if currentIP != nil {
+			return currentIP
 		}
 
 		fmt.Println("No valid IP address could be parsed from response.")
 	}
 
-	return currentIp
+	return currentIP
 }
 
 func getExternalIPByURL(url string) net.IP {
@@ -175,10 +175,10 @@ func getExternalIPByURL(url string) net.IP {
 
 	ip := regex.FindString(content)
 
-	currentIp := net.ParseIP(ip)
+	currentIP := net.ParseIP(ip)
 
-	if currentIp != nil {
-		return currentIp
+	if currentIP != nil {
+		return currentIP
 	}
 
 	return nil
