@@ -31,6 +31,7 @@ var urls = []string{
 	"smart-ip.net/myip",
 	"checkip.amazonaws.com",
 	"www.checkip.org",
+	"checkip.dns.he.net",
 }
 
 func main() {
