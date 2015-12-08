@@ -46,7 +46,7 @@ func main() {
 				fmt.Print(`
 Usage: myip [options]
 where options include:
-	--local, -l		returns the local IP address(es)
+	--local, -l		return the local IP address(es)
 	--verbose, -v		enable verbose output
 	--interactive, -i	enable interactive mode
 	--help, -h		print this help message
