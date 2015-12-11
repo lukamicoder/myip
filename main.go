@@ -38,7 +38,7 @@ func main() {
 	if len(os.Args) > 1 {
 		for _, arg := range os.Args[1:] {
 			switch arg {
-			case "-v", "--version":
+			case "-v", "--verbose":
 				verbose = true
 			case "-i", "--interactive":
 				interactive = true
