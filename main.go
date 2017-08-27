@@ -37,7 +37,7 @@ func main() {
 	if len(os.Args) > 1 {
 		for _, arg := range os.Args[1:] {
 			switch arg {
-			case "-v", "--version":
+			case "-v", "--verbose":
 				verbose = true
 			case "-i", "--interactive":
 				interactive = true
@@ -45,7 +45,7 @@ func main() {
 				fmt.Print(`
 Usage: myip [options]
 where options include:
-	--local, -l		returns the local IP address(es)
+	--local, -l		return the local IP address(es)
 	--verbose, -v		enable verbose output
 	--interactive, -i	enable interactive mode
 	--help, -h		print this help message
