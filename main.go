@@ -22,7 +22,6 @@ var urls = []string{
 	"icanhazip.com",
 	"checkip.dyndns.org",
 	"www.myipnumber.com",
-	"checkmyip.com",
 	"myexternalip.com",
 	"www.ipchicken.com",
 	"ipecho.net/plain",
@@ -31,6 +30,11 @@ var urls = []string{
 	"checkip.amazonaws.com",
 	"www.checkip.org",
 	"checkip.dns.he.net",
+	"whatismyip.akamai.com",
+	"ifconfig.me/ip",
+	"checkip.amazonaws.com",
+	"wgetip.com",
+	"ident.me",
 }
 
 func main() {
