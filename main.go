@@ -32,7 +32,7 @@ var urls = []string{
 	"checkip.dns.he.net",
 	"whatismyip.akamai.com",
 	"ifconfig.me/ip",
-	"checkip.amazonaws.com",
+	"api.ipify.org",
 	"wgetip.com",
 	"ident.me",
 }
